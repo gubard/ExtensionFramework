@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtensionFramework.Core", "ExtensionFramework.Core\ExtensionFramework.Core.csproj", "{F852106B-928D-44A2-91C9-EFA75FAF4ED0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtensionFramework.EntityFramework", "ExtensionFramework.EntityFramework\ExtensionFramework.EntityFramework.csproj", "{3A7A0A85-2F10-4026-A025-425035D47B0A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtensionFramework.ReactiveUI", "ExtensionFramework.ReactiveUI\ExtensionFramework.ReactiveUI.csproj", "{AF5D328E-6157-404A-8757-E0F040931CE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtensionFramework.AvaloniaUi", "ExtensionFramework.AvaloniaUi\ExtensionFramework.AvaloniaUi.csproj", "{D7396B10-4C9E-49DE-809A-0C610DC3B51E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F852106B-928D-44A2-91C9-EFA75FAF4ED0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F852106B-928D-44A2-91C9-EFA75FAF4ED0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F852106B-928D-44A2-91C9-EFA75FAF4ED0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F852106B-928D-44A2-91C9-EFA75FAF4ED0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A7A0A85-2F10-4026-A025-425035D47B0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A7A0A85-2F10-4026-A025-425035D47B0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A7A0A85-2F10-4026-A025-425035D47B0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A7A0A85-2F10-4026-A025-425035D47B0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF5D328E-6157-404A-8757-E0F040931CE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF5D328E-6157-404A-8757-E0F040931CE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF5D328E-6157-404A-8757-E0F040931CE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF5D328E-6157-404A-8757-E0F040931CE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7396B10-4C9E-49DE-809A-0C610DC3B51E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7396B10-4C9E-49DE-809A-0C610DC3B51E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7396B10-4C9E-49DE-809A-0C610DC3B51E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7396B10-4C9E-49DE-809A-0C610DC3B51E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
