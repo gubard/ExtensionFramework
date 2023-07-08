@@ -1,0 +1,45 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:ExtensionFramework.AvaloniaUi.Controls">
+    <Design.PreviewWith>
+        <controls:EditableTextBlock Width="500"
+                                    Height="150" />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|EditableTextBlock">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid ColumnDefinitions="Auto,Auto,*">
+                    <Button Name="{x:Static controls:EditableTextBlock.EditButtonPartName}"
+                            Content="Edit"
+                            VerticalAlignment="Top" />
+
+                    <TextBlock Grid.Column="1"
+                               Grid.ColumnSpan="2"
+                               VerticalAlignment="Center"
+                               Name="{x:Static controls:EditableTextBlock.TextBlockPartName}"
+                               Text="{TemplateBinding Text, Mode=TwoWay}" />
+
+                    <Button IsVisible="False"
+                            Name="{x:Static controls:EditableTextBlock.OkButtonPartName}"
+                            Content="Ok"
+                            VerticalAlignment="Top" />
+
+                    <Button Grid.Column="1"
+                            IsVisible="False"
+                            Name="{x:Static controls:EditableTextBlock.CancelButtonPartName}"
+                            Content="Cancel"
+                            VerticalAlignment="Top" />
+
+                    <TextBox Grid.Column="2"
+                             IsVisible="False"
+                             VerticalAlignment="Center"
+                             AcceptsReturn="{TemplateBinding AcceptsReturn, Mode=TwoWay}"
+                             AcceptsTab="{TemplateBinding AcceptsTab, Mode=TwoWay}"
+                             TextWrapping="{TemplateBinding TextWrapping, Mode=TwoWay}"
+                             Name="{x:Static controls:EditableTextBlock.TextBoxPartName}" />
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

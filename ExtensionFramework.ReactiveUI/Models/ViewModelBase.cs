@@ -1,3 +1,4 @@
+using System.Reactive.Linq;
 using System.Windows.Input;
 using ExtensionFramework.Core.DependencyInjection.Attributes;
 using ExtensionFramework.ReactiveUI.Interfaces;
@@ -7,8 +8,25 @@ namespace ExtensionFramework.ReactiveUI.Models;
 
 public class ViewModelBase : NotifyBase
 {
+    public ViewModelBase()
+    {
+        NavigateBackCommand = ReactiveCommand.CreateFromObservable(
+            () =>
+            {
+                if (Navigator is null)
+                {
+                    return Observable.Empty<IRoutableViewModel>();
+                }
+
+                return Navigator.NavigateBack();
+            }
+        );
+    }
+
     [Inject]
     public required INavigator Navigator { get; init; }
+
+    public ICommand NavigateBackCommand { get; }
 
     protected ICommand CreateCommandFromObservable<TResult>(Func<IObservable<TResult>> execute)
     {
@@ -48,6 +66,18 @@ public class ViewModelBase : NotifyBase
         SetupCommand(command);
 
         return command;
+    }
+
+    protected async Task SafeExecuteAsync(Func<Task> func)
+    {
+        try
+        {
+            await func.Invoke();
+        }
+        catch (Exception e)
+        {
+            Navigator.NavigateTo<IExceptionViewModel>(viewModel => viewModel.Exception = e);
+        }
     }
 
     private void SetupCommand<TParam, TResult>(ReactiveCommand<TParam, TResult> command)

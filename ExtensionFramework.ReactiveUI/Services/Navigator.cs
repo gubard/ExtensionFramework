@@ -1,7 +1,7 @@
-using System.Reactive;
 using ExtensionFramework.Core.DependencyInjection.Attributes;
 using ExtensionFramework.Core.DependencyInjection.Extensions;
 using ExtensionFramework.Core.DependencyInjection.Interfaces;
+using ExtensionFramework.Core.Ui.Models;
 using ExtensionFramework.ReactiveUI.Interfaces;
 using ReactiveUI;
 
@@ -15,7 +15,13 @@ public class Navigator : INavigator
     [Inject]
     public required IResolver Resolver { get; init; }
 
-    public ReactiveCommand<Unit, IRoutableViewModel?> NavigateBack => RoutingState.NavigateBack;
+    [Inject]
+    public required AppConfiguration Configuration { get; init; }
+
+    public IObservable<IRoutableViewModel?> NavigateBack()
+    {
+        return NavigateTo(Configuration.DefaultMainViewType);
+    }
 
     public IObservable<IRoutableViewModel> NavigateTo(Type type)
     {
