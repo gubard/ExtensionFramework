@@ -7,15 +7,15 @@ using Avalonia.Media;
 
 namespace ExtensionFramework.AvaloniaUi.Controls;
 
-[TemplatePart(TextBlockPartName, typeof(TextBlock))]
-[TemplatePart(TextBoxPartName, typeof(TextBox))]
+[TemplatePart(TextBoxEditablePartName, typeof(TextBox))]
+[TemplatePart(TextBoxReadOnlyPartName, typeof(TextBox))]
 [TemplatePart(EditButtonPartName, typeof(Button))]
 [TemplatePart(OkButtonPartName, typeof(Button))]
 [TemplatePart(CancelButtonPartName, typeof(Button))]
 public class EditableTextBlock : TemplatedControl
 {
-    public const string TextBlockPartName = "PART_TextBlock";
-    public const string TextBoxPartName = "PART_TextBox";
+    public const string TextBoxEditablePartName = "PART_EditableTextBox";
+    public const string TextBoxReadOnlyPartName = "PART_ReadOnlyTextBox";
     public const string EditButtonPartName = "PART_EditButton";
     public const string OkButtonPartName = "PART_OkButton";
     public const string CancelButtonPartName = "PART_CancelButton";
@@ -30,6 +30,12 @@ public class EditableTextBlock : TemplatedControl
     /// </summary>
     public static readonly StyledProperty<bool> AcceptsReturnProperty =
         TextBox.AcceptsReturnProperty.AddOwner<EditableTextBlock>();
+    
+    /// <summary>
+    /// Defines the <see cref="Watermark"/> property
+    /// </summary>
+    public static readonly StyledProperty<string?> WatermarkProperty =
+        TextBox.WatermarkProperty.AddOwner<EditableTextBlock>();
 
     /// <summary>
     /// Defines the <see cref="AcceptsTab"/> property
@@ -40,8 +46,8 @@ public class EditableTextBlock : TemplatedControl
     public static readonly StyledProperty<TextWrapping> TextWrappingProperty =
         TextBlock.TextWrappingProperty.AddOwner<EditableTextBlock>();
 
-    private TextBlock? textBlock;
-    private TextBox? textBox;
+    private TextBox? readOnlyTextBox;
+    private TextBox? editableTextBox;
     private Button? editButton;
     private Button? okButton;
     private Button? cancelButton;
@@ -81,6 +87,16 @@ public class EditableTextBlock : TemplatedControl
         get => GetValue(TextWrappingProperty);
         set => SetValue(TextWrappingProperty, value);
     }
+    
+    /// <summary>
+    /// Gets or sets the placeholder or descriptive text that is displayed even if the <see cref="Text"/>
+    /// property is not yet set.
+    /// </summary>
+    public string? Watermark
+    {
+        get => GetValue(WatermarkProperty);
+        set => SetValue(WatermarkProperty, value);
+    }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
@@ -99,8 +115,8 @@ public class EditableTextBlock : TemplatedControl
             cancelButton.Click -= Cancel;
         }
 
-        textBlock = e.NameScope.Get<TextBlock>(TextBlockPartName);
-        textBox = e.NameScope.Get<TextBox>(TextBoxPartName);
+        editableTextBox = e.NameScope.Get<TextBox>(TextBoxEditablePartName);
+        readOnlyTextBox = e.NameScope.Get<TextBox>(TextBoxReadOnlyPartName);
         editButton = e.NameScope.Get<Button>(EditButtonPartName);
         okButton = e.NameScope.Get<Button>(OkButtonPartName);
         cancelButton = e.NameScope.Get<Button>(CancelButtonPartName);
@@ -116,9 +132,9 @@ public class EditableTextBlock : TemplatedControl
             return;
         }
 
-        textBox.Text = textBlock.Text;
-        textBlock.IsVisible = false;
-        textBox.IsVisible = true;
+        editableTextBox.Text = readOnlyTextBox.Text;
+        readOnlyTextBox.IsVisible = false;
+        editableTextBox.IsVisible = true;
         editButton.IsVisible = false;
         okButton.IsVisible = true;
         cancelButton.IsVisible = true;
@@ -131,9 +147,9 @@ public class EditableTextBlock : TemplatedControl
             return;
         }
 
-        textBlock.Text = textBox.Text;
-        textBlock.IsVisible = true;
-        textBox.IsVisible = false;
+        readOnlyTextBox.Text = editableTextBox.Text;
+        readOnlyTextBox.IsVisible = true;
+        editableTextBox.IsVisible = false;
         editButton.IsVisible = true;
         okButton.IsVisible = false;
         cancelButton.IsVisible = false;
@@ -146,8 +162,8 @@ public class EditableTextBlock : TemplatedControl
             return;
         }
 
-        textBlock.IsVisible = true;
-        textBox.IsVisible = false;
+        readOnlyTextBox.IsVisible = true;
+        editableTextBox.IsVisible = false;
         editButton.IsVisible = true;
         okButton.IsVisible = false;
         cancelButton.IsVisible = false;
@@ -155,12 +171,12 @@ public class EditableTextBlock : TemplatedControl
 
     private bool IsInited()
     {
-        if (textBlock is null)
+        if (readOnlyTextBox is null)
         {
             return false;
         }
 
-        if (textBox is null)
+        if (editableTextBox is null)
         {
             return false;
         }

@@ -8,6 +8,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtensionFramework.Reactive
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtensionFramework.AvaloniaUi", "ExtensionFramework.AvaloniaUi\ExtensionFramework.AvaloniaUi.csproj", "{D7396B10-4C9E-49DE-809A-0C610DC3B51E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtensionFramework.AvaloniaUi.Material", "ExtensionFramework.AvaloniaUi.Material\ExtensionFramework.AvaloniaUi.Material.csproj", "{F4DC7817-7813-46B3-B68B-BBBB112C658C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtensionFramework.AvaloniaUi.ReactiveUI", "ExtensionFramework.AvaloniaUi.ReactiveUI\ExtensionFramework.AvaloniaUi.ReactiveUI.csproj", "{487E0722-70C3-49F2-B122-5C6B4FB8563E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +34,13 @@ Global
 		{D7396B10-4C9E-49DE-809A-0C610DC3B51E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7396B10-4C9E-49DE-809A-0C610DC3B51E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7396B10-4C9E-49DE-809A-0C610DC3B51E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4DC7817-7813-46B3-B68B-BBBB112C658C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4DC7817-7813-46B3-B68B-BBBB112C658C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4DC7817-7813-46B3-B68B-BBBB112C658C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4DC7817-7813-46B3-B68B-BBBB112C658C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{487E0722-70C3-49F2-B122-5C6B4FB8563E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{487E0722-70C3-49F2-B122-5C6B4FB8563E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{487E0722-70C3-49F2-B122-5C6B4FB8563E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{487E0722-70C3-49F2-B122-5C6B4FB8563E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

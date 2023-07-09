@@ -3,7 +3,8 @@
         xmlns:controls="clr-namespace:ExtensionFramework.AvaloniaUi.Controls">
     <Design.PreviewWith>
         <controls:EditableTextBlock Width="500"
-                                    Height="150" />
+                                    Height="150"
+                                    Watermark="Text" />
     </Design.PreviewWith>
 
     <Style Selector="controls|EditableTextBlock">
@@ -14,11 +15,14 @@
                             Content="Edit"
                             VerticalAlignment="Top" />
 
-                    <TextBlock Grid.Column="1"
-                               Grid.ColumnSpan="2"
-                               VerticalAlignment="Center"
-                               Name="{x:Static controls:EditableTextBlock.TextBlockPartName}"
-                               Text="{TemplateBinding Text, Mode=TwoWay}" />
+                    <TextBox Grid.Column="1"
+                             Grid.ColumnSpan="2"
+                             VerticalAlignment="Top"
+                             Name="{x:Static controls:EditableTextBlock.TextBoxReadOnlyPartName}"
+                             Text="{TemplateBinding Text, Mode=TwoWay}"
+                             IsReadOnly="True"
+                             VerticalContentAlignment="Top"
+                             Watermark="{TemplateBinding Watermark, Mode=TwoWay}" />
 
                     <Button IsVisible="False"
                             Name="{x:Static controls:EditableTextBlock.OkButtonPartName}"
@@ -33,11 +37,12 @@
 
                     <TextBox Grid.Column="2"
                              IsVisible="False"
-                             VerticalAlignment="Center"
+                             VerticalAlignment="Top"
                              AcceptsReturn="{TemplateBinding AcceptsReturn, Mode=TwoWay}"
                              AcceptsTab="{TemplateBinding AcceptsTab, Mode=TwoWay}"
                              TextWrapping="{TemplateBinding TextWrapping, Mode=TwoWay}"
-                             Name="{x:Static controls:EditableTextBlock.TextBoxPartName}" />
+                             Name="{x:Static controls:EditableTextBlock.TextBoxEditablePartName}"
+                             Watermark="{TemplateBinding Watermark, Mode=TwoWay}" />
                 </Grid>
             </ControlTemplate>
         </Setter>

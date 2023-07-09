@@ -7,9 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Avalonia" Version="11.0.0-rc2.2" />
-      <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.0-rc2.2" />
-      <PackageReference Include="Avalonia.Xaml.Interactions.DragAndDrop" Version="11.0.0-rc2.2" />
+      <PackageReference Include="Avalonia" Version="11.0.0" />
+      <PackageReference Include="Avalonia.Xaml.Interactions.DragAndDrop" Version="11.0.0.1" />
     </ItemGroup>
 
     <ItemGroup>

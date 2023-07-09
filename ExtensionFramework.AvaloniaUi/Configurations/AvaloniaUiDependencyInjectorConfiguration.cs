@@ -1,12 +1,10 @@
 using Avalonia;
-using Avalonia.ReactiveUI;
 using ExtensionFramework.AvaloniaUi.Controls;
 using ExtensionFramework.Core.Common.Extensions;
 using ExtensionFramework.Core.DependencyInjection.Interfaces;
 using ExtensionFramework.Core.DependencyInjection.Extensions;
 using ExtensionFramework.Core.DependencyInjection.Models;
 using ExtensionFramework.Core.Expressions.Extensions;
-using ReactiveUI;
 
 namespace ExtensionFramework.AvaloniaUi.Configurations;
 
@@ -15,8 +13,6 @@ public readonly struct AvaloniaUiDependencyInjectorConfiguration : IDependencyIn
     public void Configure(IDependencyInjectorRegister register)
     {
         register.RegisterTransient<PathControl>();
-        register.RegisterScope<RoutedViewHost>();
-        register.RegisterScopeAutoInjectMember((RoutedViewHost host) => host.Router, (RoutingState state) => state);
         RegisterViewModels(register);
     }
 
