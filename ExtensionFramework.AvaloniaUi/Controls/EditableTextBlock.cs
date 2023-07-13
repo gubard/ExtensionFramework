@@ -138,6 +138,8 @@ public class EditableTextBlock : TemplatedControl
         editButton.IsVisible = false;
         okButton.IsVisible = true;
         cancelButton.IsVisible = true;
+        editableTextBox.Focus();
+        editableTextBox.CaretIndex = editableTextBox.Text?.Length ?? 0;
     }
 
     private void Ok(object? sender, RoutedEventArgs e)

@@ -1,6 +1,8 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="clr-namespace:ExtensionFramework.AvaloniaUi.Controls">
+        xmlns:controls="clr-namespace:ExtensionFramework.AvaloniaUi.Controls;assembly=ExtensionFramework.AvaloniaUi"
+        xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+        xmlns:assists="clr-namespace:Material.Styles.Assists;assembly=Material.Styles">
     <Design.PreviewWith>
         <controls:EditableTextBlock Width="500"
                                     Height="150"
@@ -25,16 +27,20 @@
                     </StackPanel>
 
                     <TextBox Grid.Column="1" VerticalAlignment="Top"
+                             Classes="outline"
                              HorizontalAlignment="Left"
                              Name="{x:Static controls:EditableTextBlock.TextBoxReadOnlyPartName}"
                              Text="{TemplateBinding Text, Mode=TwoWay}"
                              IsReadOnly="True"
                              VerticalContentAlignment="Top"
+                             Theme="{StaticResource OutlineTextBox}"
                              Watermark="{TemplateBinding Watermark, Mode=TwoWay}"
-                             UseFloatingWatermark="True" />
+                             UseFloatingWatermark="True"
+                             assists:TextFieldAssist.Label="{TemplateBinding Watermark}" />
 
                     <TextBox Grid.Column="1"
                              IsVisible="False"
+                             Classes="outline"
                              VerticalAlignment="Top"
                              HorizontalAlignment="Left"
                              AcceptsReturn="{TemplateBinding AcceptsReturn, Mode=TwoWay}"
@@ -42,7 +48,9 @@
                              TextWrapping="{TemplateBinding TextWrapping, Mode=TwoWay}"
                              Name="{x:Static controls:EditableTextBlock.TextBoxEditablePartName}"
                              Watermark="{TemplateBinding Watermark, Mode=TwoWay}"
-                             UseFloatingWatermark="True" />
+                             Theme="{StaticResource OutlineTextBox}"
+                             UseFloatingWatermark="True"
+                             assists:TextFieldAssist.Label="{TemplateBinding Watermark}" />
                 </Grid>
             </ControlTemplate>
         </Setter>
@@ -51,24 +59,33 @@
     <Style Selector="controls|EditableTextBlock /template/ Button#PART_EditButton">
         <Setter Property="Content">
             <Template>
-                <TextBlock Text="Edit" />
+                <avalonia:MaterialIcon Kind="Pencil" />
             </Template>
         </Setter>
+
+        <Setter Property="Padding" Value="7" />
+        <Setter Property="Theme" Value="{StaticResource FlatButton}" />
     </Style>
 
     <Style Selector="controls|EditableTextBlock /template/ Button#PART_OkButton">
         <Setter Property="Content">
             <Template>
-                <TextBlock Text="Ok" />
+                <avalonia:MaterialIcon Kind="Check" />
             </Template>
         </Setter>
+
+        <Setter Property="Padding" Value="7" />
+        <Setter Property="Theme" Value="{StaticResource FlatButton}" />
     </Style>
 
     <Style Selector="controls|EditableTextBlock /template/ Button#PART_CancelButton">
         <Setter Property="Content">
             <Template>
-                <TextBlock Text="Cancel" />
+                <avalonia:MaterialIcon Kind="Cancel" />
             </Template>
         </Setter>
+
+        <Setter Property="Padding" Value="7" />
+        <Setter Property="Theme" Value="{StaticResource FlatButton}" />
     </Style>
 </Styles>

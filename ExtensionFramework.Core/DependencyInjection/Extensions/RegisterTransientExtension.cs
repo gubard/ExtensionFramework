@@ -46,7 +46,7 @@ public static class RegisterTransientExtension
         Type impType
     )
     {
-        var constructor = impType.GetSingleConstructor();
+        var constructor = impType.GetSingleConstructorOrNull();
 
         if (constructor is null)
         {

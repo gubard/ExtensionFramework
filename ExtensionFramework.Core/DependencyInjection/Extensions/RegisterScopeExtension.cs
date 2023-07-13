@@ -52,7 +52,7 @@ public static class RegisterScopeExtension
 
     public static void RegisterScope(this IRegisterScope registerTransient, Type id, Type impType)
     {
-        var constructor = impType.GetSingleConstructor();
+        var constructor = impType.GetSingleConstructorOrNull();
 
         if (constructor is null)
         {

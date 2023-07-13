@@ -14,7 +14,7 @@ public static class RegisterTransientReservedCtorParameterExtension
     )
     {
         var type = typeof(T);
-        var constructor = type.GetSingleConstructor().ThrowIfNull();
+        var constructor = type.GetSingleConstructorOrNull().ThrowIfNull();
 
         var parameter = constructor
             .GetParameters()
@@ -30,7 +30,7 @@ public static class RegisterTransientReservedCtorParameterExtension
     )
     {
         var type = typeof(T);
-        var constructor = type.GetSingleConstructor().ThrowIfNull();
+        var constructor = type.GetSingleConstructorOrNull().ThrowIfNull();
 
         var parameter = constructor
             .GetParameters()

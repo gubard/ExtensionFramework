@@ -17,7 +17,9 @@ namespace ExtensionFramework.Core.DependencyInjection.Services;
 public class DependencyInjector : IDependencyInjector
 {
     private readonly DependencyInjectorFields fields;
-
+    public static IResolver? Default;
+    
+    
     public DependencyInjector(
         IReadOnlyDictionary<TypeInformation, InjectorItem> injectors,
         IReadOnlyDictionary<AutoInjectMemberIdentifier, InjectorItem> autoInjects,

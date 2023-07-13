@@ -5,7 +5,7 @@ namespace ExtensionFramework.Core.DependencyInjection.Extensions;
 
 public static class TypeExtension
 {
-    public static ConstructorInfo? GetSingleConstructor(this Type type)
+    public static ConstructorInfo? GetSingleConstructorOrNull(this Type type)
     {
         var constructors = type.GetConstructors();
 
