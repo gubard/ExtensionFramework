@@ -1,10 +1,12 @@
 using Avalonia;
 using ExtensionFramework.AvaloniaUi.Controls;
+using ExtensionFramework.AvaloniaUi.Services;
 using ExtensionFramework.Core.Common.Extensions;
 using ExtensionFramework.Core.DependencyInjection.Interfaces;
 using ExtensionFramework.Core.DependencyInjection.Extensions;
 using ExtensionFramework.Core.DependencyInjection.Models;
 using ExtensionFramework.Core.Expressions.Extensions;
+using ExtensionFramework.Core.Ui.Interfaces;
 
 namespace ExtensionFramework.AvaloniaUi.Configurations;
 
@@ -13,6 +15,14 @@ public readonly struct AvaloniaUiDependencyInjectorConfiguration : IDependencyIn
     public void Configure(IDependencyInjectorRegister register)
     {
         register.RegisterTransient<PathControl>();
+
+        register.RegisterScope<IDialogViewer>(
+            (IResolver resolver) => new DialogViewer(DialogViewer.DefaultDialogIdentifier)
+            {
+                Resolver = resolver
+            }
+        );
+
         RegisterViewModels(register);
     }
 

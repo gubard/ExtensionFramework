@@ -1,6 +1,7 @@
 using System.Reactive.Linq;
 using System.Windows.Input;
 using ExtensionFramework.Core.DependencyInjection.Attributes;
+using ExtensionFramework.Core.Ui.Interfaces;
 using ExtensionFramework.ReactiveUI.Interfaces;
 using ReactiveUI;
 
@@ -17,14 +18,24 @@ public class ViewModelBase : NotifyBase
                 {
                     return Observable.Empty<IRoutableViewModel>();
                 }
+                if (DialogViewer is null)
+                {
+                    return Observable.Empty<IRoutableViewModel>();
+                }
 
-                return Navigator.NavigateBack();
+                var result = Navigator.NavigateBack();
+                DialogViewer.CloseDialog();
+
+                return result;
             }
         );
     }
 
     [Inject]
     public required INavigator Navigator { get; init; }
+    
+    [Inject]
+    public required IDialogViewer DialogViewer { get; set; }
 
     public ICommand NavigateBackCommand { get; }
 
