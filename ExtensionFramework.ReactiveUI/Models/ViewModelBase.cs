@@ -7,37 +7,41 @@ using ReactiveUI;
 
 namespace ExtensionFramework.ReactiveUI.Models;
 
-public class ViewModelBase : NotifyBase
+public class ViewModelBase : NotifyBase, IIsDialog
 {
     public ViewModelBase()
     {
         NavigateBackCommand = ReactiveCommand.CreateFromObservable(
+            () => Navigator is null ? Observable.Empty<IRoutableViewModel>() : Navigator.NavigateBack()
+        );
+
+        CloseDialogCommand = ReactiveCommand.Create(() => DialogViewer?.CloseDialog());
+
+        BackCommand = ReactiveCommand.Create(
             () =>
             {
-                if (Navigator is null)
+                if (IsDialog)
                 {
-                    return Observable.Empty<IRoutableViewModel>();
+                    CloseDialogCommand.Execute(null);
                 }
-                if (DialogViewer is null)
+                else
                 {
-                    return Observable.Empty<IRoutableViewModel>();
+                    NavigateBackCommand.Execute(null);
                 }
-
-                var result = Navigator.NavigateBack();
-                DialogViewer.CloseDialog();
-
-                return result;
             }
         );
     }
 
     [Inject]
     public required INavigator Navigator { get; init; }
-    
+
     [Inject]
     public required IDialogViewer DialogViewer { get; set; }
 
     public ICommand NavigateBackCommand { get; }
+    public ICommand CloseDialogCommand { get; }
+    public ICommand BackCommand { get; }
+    public bool IsDialog { get; set; }
 
     protected ICommand CreateCommandFromObservable<TResult>(Func<IObservable<TResult>> execute)
     {
