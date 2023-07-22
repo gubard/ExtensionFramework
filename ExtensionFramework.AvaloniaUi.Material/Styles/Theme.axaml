@@ -5,5 +5,14 @@
             <!-- Add Controls for Previewer Here -->
         </Border>
     </Design.PreviewWith>
+
+    <Styles.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <MergeResourceInclude Source="NullableDatePicker.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Styles.Resources>
+
     <StyleInclude Source="EditableTextBlock.axaml" />
 </Styles>

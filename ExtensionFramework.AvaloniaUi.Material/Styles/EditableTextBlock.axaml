@@ -1,8 +1,7 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:ExtensionFramework.AvaloniaUi.Controls;assembly=ExtensionFramework.AvaloniaUi"
-        xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
-        xmlns:assists="clr-namespace:Material.Styles.Assists;assembly=Material.Styles">
+        xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia">
     <Design.PreviewWith>
         <controls:EditableTextBlock Width="500"
                                     Height="150"
@@ -12,30 +11,23 @@
     <Style Selector="controls|EditableTextBlock">
         <Setter Property="Template">
             <ControlTemplate>
-                <Grid ColumnDefinitions="Auto,*">
-                    <StackPanel VerticalAlignment="Center"
-                                HorizontalAlignment="Right"
-                                Orientation="Horizontal"
-                                ZIndex="100">
-                        <Button Name="{x:Static controls:EditableTextBlock.EditButtonPartName}" />
-
-                        <Button IsVisible="False"
-                                Name="{x:Static controls:EditableTextBlock.OkButtonPartName}" />
-
-                        <Button IsVisible="False"
-                                Name="{x:Static controls:EditableTextBlock.CancelButtonPartName}" />
-                    </StackPanel>
-
+                <Panel>
                     <TextBox Grid.Column="1" VerticalAlignment="Top"
                              HorizontalAlignment="Left"
                              Name="{x:Static controls:EditableTextBlock.TextBoxReadOnlyPartName}"
                              Text="{TemplateBinding Text, Mode=TwoWay}"
                              IsReadOnly="True"
                              Watermark="{TemplateBinding Watermark, Mode=TwoWay}"
-                             UseFloatingWatermark="False" />
+                             UseFloatingWatermark="False">
+                        <TextBox.InnerLeftContent>
+                            <Button Name="{x:Static controls:EditableTextBlock.EditButtonPartName}"
+                                    Theme="{StaticResource FlatButton}">
+                                <avalonia:MaterialIcon Kind="Pencil" />
+                            </Button>
+                        </TextBox.InnerLeftContent>
+                    </TextBox>
 
-                    <TextBox Grid.Column="1"
-                             IsVisible="False"
+                    <TextBox IsVisible="False"
                              VerticalAlignment="Top"
                              HorizontalAlignment="Left"
                              AcceptsReturn="{TemplateBinding AcceptsReturn, Mode=TwoWay}"
@@ -44,42 +36,27 @@
                              Name="{x:Static controls:EditableTextBlock.TextBoxEditablePartName}"
                              Watermark="{TemplateBinding Watermark, Mode=TwoWay}"
                              Theme="{StaticResource OutlineTextBox}"
-                             UseFloatingWatermark="False" />
-                </Grid>
+                             UseFloatingWatermark="False">
+                        <TextBox.InnerLeftContent>
+                            <Grid RowDefinitions="*,*"
+                                  Margin="0,8,0,0">
+                                <Button IsVisible="False"
+                                        Name="{x:Static controls:EditableTextBlock.OkButtonPartName}"
+                                        Theme="{StaticResource FlatButton}">
+                                    <avalonia:MaterialIcon Kind="Check" />
+                                </Button>
+
+                                <Button Grid.Row="1"
+                                        IsVisible="False"
+                                        Name="{x:Static controls:EditableTextBlock.CancelButtonPartName}"
+                                        Theme="{StaticResource FlatButton}">
+                                    <avalonia:MaterialIcon Kind="Cancel" />
+                                </Button>
+                            </Grid>
+                        </TextBox.InnerLeftContent>
+                    </TextBox>
+                </Panel>
             </ControlTemplate>
         </Setter>
-    </Style>
-
-    <Style Selector="controls|EditableTextBlock /template/ Button#PART_EditButton">
-        <Setter Property="Content">
-            <Template>
-                <avalonia:MaterialIcon Kind="Pencil" />
-            </Template>
-        </Setter>
-
-        <Setter Property="Padding" Value="7" />
-        <Setter Property="Theme" Value="{StaticResource FlatButton}" />
-    </Style>
-
-    <Style Selector="controls|EditableTextBlock /template/ Button#PART_OkButton">
-        <Setter Property="Content">
-            <Template>
-                <avalonia:MaterialIcon Kind="Check" />
-            </Template>
-        </Setter>
-
-        <Setter Property="Padding" Value="7" />
-        <Setter Property="Theme" Value="{StaticResource FlatButton}" />
-    </Style>
-
-    <Style Selector="controls|EditableTextBlock /template/ Button#PART_CancelButton">
-        <Setter Property="Content">
-            <Template>
-                <avalonia:MaterialIcon Kind="Cancel" />
-            </Template>
-        </Setter>
-
-        <Setter Property="Padding" Value="7" />
-        <Setter Property="Theme" Value="{StaticResource FlatButton}" />
     </Style>
 </Styles>
