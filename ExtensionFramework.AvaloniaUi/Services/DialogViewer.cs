@@ -37,6 +37,9 @@ public class DialogViewer : IDialogViewer
 
     public void CloseDialog()
     {
-        DialogHost.Close(dialogIdentifier);
+        if (DialogHost.IsDialogOpen(dialogIdentifier))
+        {
+            DialogHost.Close(dialogIdentifier);
+        }
     }
 }

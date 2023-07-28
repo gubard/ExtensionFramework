@@ -9,6 +9,8 @@ namespace ExtensionFramework.ReactiveUI.Models;
 
 public class ViewModelBase : NotifyBase, IIsDialog
 {
+    private static readonly TimeSpan TaskTimeout = TimeSpan.FromMilliseconds(500);
+
     public ViewModelBase()
     {
         NavigateBackCommand = ReactiveCommand.CreateFromObservable(
@@ -75,6 +77,22 @@ public class ViewModelBase : NotifyBase, IIsDialog
         return command;
     }
 
+    protected ICommand CreateCommandFromTaskWithDialogProgressIndicator(Func<Task> execute)
+    {
+        var command = ReactiveCommand.CreateFromTask(CreateWithDialogProgressIndicatorAsync(execute));
+        SetupCommand(command);
+
+        return command;
+    }
+
+    protected ICommand CreateCommandFromTaskWithDialogProgressIndicator<TParam>(Func<TParam, Task> execute)
+    {
+        var command = ReactiveCommand.CreateFromTask(CreateWithDialogProgressIndicatorAsync(execute));
+        SetupCommand(command);
+
+        return command;
+    }
+
     protected ICommand CreateCommandFromTask<TParam>(Func<TParam, Task> execute)
     {
         var command = ReactiveCommand.CreateFromTask(execute);
@@ -95,10 +113,60 @@ public class ViewModelBase : NotifyBase, IIsDialog
         }
     }
 
+    protected Func<Task> CreateWithDialogProgressIndicatorAsync(Func<Task> execute)
+    {
+        return async () =>
+        {
+            var task = execute.Invoke();
+
+            if (await IsTakeMoreThen(task, TaskTimeout))
+            {
+                DialogViewer.ShowDialogAsync(typeof(IDialogProgressIndicator));
+                await task;
+                DialogViewer.CloseDialog();
+            }
+
+            await task;
+        };
+    }
+
+    protected Func<TParam, Task> CreateWithDialogProgressIndicatorAsync<TParam>(Func<TParam, Task> execute)
+    {
+        return async param =>
+        {
+            var task = execute.Invoke(param);
+
+            if (await IsTakeMoreThen(task, TaskTimeout))
+            {
+                DialogViewer.ShowDialogAsync(typeof(IDialogProgressIndicator));
+                await task;
+                DialogViewer.CloseDialog();
+            }
+
+            await task;
+        };
+    }
+
+    private async Task<bool> IsTakeMoreThen(Task task, TimeSpan timeout)
+    {
+        var tasks = new[]
+        {
+            task, Task.Delay(timeout),
+        };
+
+        var resultTask = await Task.WhenAny(tasks);
+
+        return resultTask != task;
+    }
+
     private void SetupCommand<TParam, TResult>(ReactiveCommand<TParam, TResult> command)
     {
         command.ThrownExceptions.Subscribe(
-            exception => Navigator.NavigateTo<IExceptionViewModel>(viewModel => viewModel.Exception = exception)
+            exception =>
+            {
+                Navigator.NavigateTo<IExceptionViewModel>(viewModel => viewModel.Exception = exception);
+                DialogViewer.CloseDialog();
+            }
         );
     }
 }
