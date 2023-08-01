@@ -15,4 +15,7 @@
     </Styles.Resources>
 
     <StyleInclude Source="EditableTextBlock.axaml" />
+    <StyleInclude Source="DayOfWeekSelector.axaml" />
+    <StyleInclude Source="DayOfMonthSelector.axaml" />
+    <StyleInclude Source="DayOfYearSelector.axaml" />
 </Styles>

@@ -8,7 +8,7 @@ public static class DateTimeOffsetExtension
 
         return result;
     }
-    
+
     public static DateTimeOffset? ToCurrentDayOrNull(this DateTimeOffset? date)
     {
         if (date is null)
@@ -17,5 +17,35 @@ public static class DateTimeOffsetExtension
         }
 
         return date.Value.ToCurrentDay();
+    }
+
+    public static DateTimeOffset WithDay(this DateTimeOffset date, int day)
+    {
+        return new DateTimeOffset(
+            date.Year,
+            date.Month,
+            day,
+            date.Hour,
+            date.Minute,
+            date.Second,
+            date.Millisecond,
+            date.Microsecond,
+            date.Offset
+        );
+    }
+
+    public static DateTimeOffset WithMonth(this DateTimeOffset date, int month)
+    {
+        return new DateTimeOffset(
+            date.Year,
+            month,
+            date.Day,
+            date.Hour,
+            date.Minute,
+            date.Second,
+            date.Millisecond,
+            date.Microsecond,
+            date.Offset
+        );
     }
 }
