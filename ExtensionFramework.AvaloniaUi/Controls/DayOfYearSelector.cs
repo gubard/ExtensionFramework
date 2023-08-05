@@ -3,7 +3,6 @@ using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
-using Avalonia.Interactivity;
 using ExtensionFramework.AvaloniaUi.Models;
 using ExtensionFramework.Core.Common.Models;
 

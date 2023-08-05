@@ -12,6 +12,8 @@ public class DialogViewer : IDialogViewer
 
     private readonly string dialogIdentifier;
 
+    private static object? currentContent;
+
     public DialogViewer(string dialogIdentifier)
     {
         this.dialogIdentifier = dialogIdentifier;
@@ -31,6 +33,7 @@ public class DialogViewer : IDialogViewer
     {
         var content = Resolver.Resolve<TView>();
         setup?.Invoke(content);
+        currentContent = content;
 
         return DialogHost.Show(content, dialogIdentifier);
     }
@@ -39,7 +42,7 @@ public class DialogViewer : IDialogViewer
     {
         if (DialogHost.IsDialogOpen(dialogIdentifier))
         {
-            DialogHost.Close(dialogIdentifier);
+            DialogHost.Close(dialogIdentifier, currentContent);
         }
     }
 }
