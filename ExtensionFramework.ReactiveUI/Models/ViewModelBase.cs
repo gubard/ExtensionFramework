@@ -9,7 +9,7 @@ namespace ExtensionFramework.ReactiveUI.Models;
 
 public class ViewModelBase : NotifyBase, IIsDialog
 {
-    private static readonly TimeSpan TaskTimeout = TimeSpan.FromMilliseconds(500);
+    private static readonly TimeSpan TaskTimeout = TimeSpan.FromMilliseconds(120);
 
     public ViewModelBase()
     {

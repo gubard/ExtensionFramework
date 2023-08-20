@@ -14,7 +14,7 @@ public static class StringExtension
 
     public static Uri ToUri(this string str)
     {
-        return new (str);
+        return new(str);
     }
 
     public static string ThrowIfNullOrWhiteSpace(
@@ -40,12 +40,12 @@ public static class StringExtension
 
     public static FileInfo ToFile(this string path)
     {
-        return new (path);
+        return new(path);
     }
 
     public static DirectoryInfo ToDirectory(this string path)
     {
-        return new (path);
+        return new(path);
     }
 
     public static string ToConsoleLine(this string line)
@@ -111,5 +111,35 @@ public static class StringExtension
         }
 
         return $"{str}{line}{Environment.NewLine}";
+    }
+
+    public static string Duplicate(this string str, ulong count)
+    {
+        if (count == 0)
+        {
+            return string.Empty;
+        }
+
+        var builder = new StringBuilder();
+
+        for (var i = 0ul; i < count; i++)
+        {
+            builder.Append(str);
+        }
+
+        return builder.ToString();
+    }
+
+    public static void Duplicate(this StringBuilder builder, string str, ulong count)
+    {
+        if (count == 0)
+        {
+            return;
+        }
+
+        for (var i = 0ul; i < count; i++)
+        {
+            builder.Append(str);
+        }
     }
 }

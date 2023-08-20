@@ -12,7 +12,7 @@
         <Setter Property="Template">
             <ControlTemplate>
                 <Panel>
-                    <TextBox Grid.Column="1" VerticalAlignment="Top"
+                    <TextBox VerticalAlignment="Top"
                              HorizontalAlignment="Left"
                              Name="{x:Static controls:EditableTextBlock.TextBoxReadOnlyPartName}"
                              Text="{TemplateBinding Text, Mode=TwoWay}"
@@ -20,9 +20,8 @@
                              Watermark="{TemplateBinding Watermark, Mode=TwoWay}"
                              UseFloatingWatermark="False">
                         <TextBox.InnerLeftContent>
-                            <Button Name="{x:Static controls:EditableTextBlock.EditButtonPartName}"
-                                    Theme="{StaticResource FlatButton}">
-                                <avalonia:MaterialIcon Kind="Pencil" />
+                            <Button Name="{x:Static controls:EditableTextBlock.EditButtonPartName}">
+                                <avalonia:MaterialIcon Kind="Pencil"  />
                             </Button>
                         </TextBox.InnerLeftContent>
                     </TextBox>
@@ -41,15 +40,13 @@
                             <Grid RowDefinitions="*,*"
                                   Margin="0,8,0,0">
                                 <Button IsVisible="False"
-                                        Name="{x:Static controls:EditableTextBlock.OkButtonPartName}"
-                                        Theme="{StaticResource FlatButton}">
+                                        Name="{x:Static controls:EditableTextBlock.OkButtonPartName}">
                                     <avalonia:MaterialIcon Kind="Check" />
                                 </Button>
 
                                 <Button Grid.Row="1"
                                         IsVisible="False"
-                                        Name="{x:Static controls:EditableTextBlock.CancelButtonPartName}"
-                                        Theme="{StaticResource FlatButton}">
+                                        Name="{x:Static controls:EditableTextBlock.CancelButtonPartName}">
                                     <avalonia:MaterialIcon Kind="Cancel" />
                                 </Button>
                             </Grid>
